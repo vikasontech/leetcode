@@ -20,10 +20,6 @@ class Solution:
       Aright = A[i + 1]  if (i+1) < len(A) else float('infinity')
       Bleft = B[j] if j >= 0 else float('-infinity')
       
-asdf
-asf
- B[j + 1]  if (j+1) < len(B) else float('infinity')
-      
       # Partitian is corret
       if Aleft <= Bright and Bleft <= Aright:
         #odd
