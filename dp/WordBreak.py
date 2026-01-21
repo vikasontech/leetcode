@@ -3,16 +3,7 @@ from importlib.util import source_hash
 
 
 class Solution:
-    def printArray(self, s: str):
-        # Header row (indexes)
-        header = "| " + " | ".join(str(i) for i in range(len(s))) + " |"
 
-        # Character row
-        chars = "| " + " | ".join(c for c in s) + " |"
-
-        print(header)
-        # print(separator)
-        print(chars)
 
     def wordBreak(self, s: str, wordDict: list[str]) -> bool:
         self.printArray(s)
