@@ -1,38 +1,40 @@
-# https://leetcode.com/problems/3sum/?envType=problem-list-v2&envId=oizxjoit
-# https://www.youtube.com/watch?v=jzZsG8n2R9A
+# https://leetcode.com/problems/3sum/description/?envType=problem-list-v2&envId=oizxjoit
+import Utilities
+# https://www.youtube.com/watch?v=cRBSOz49fQk
+# https://www.youtube.com/watch?v=jzZsG8n2R9A&t=30s
 class Solution:
+    def twoSum(self, nums: list[int], i: int) -> list[int]:
+        left = i + 1
+        right = len(nums) - 1
+        while left < right:
+            sum = nums[i] + nums[left] + nums[right]
+            while nums[left] == nums[i]:
+                left += 1
+            while nums[right] == nums[i]:
+                right -= 1
+
+            if sum == 0:
+                return [nums[i], nums[left], nums[right]]
+            elif sum > 0:
+                right -= 1
+            else:
+                left += 1
+        return []
+
+
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        # [-4,-1,-1,0,1,2]
+        if len(nums) ==0:
+            return []
         nums.sort()
         res = []
-        i = 0
-        # while i < len(nums):
-        for i, a in enumerate(nums):
-            if i > 0 and a == nums[i-1]:
-                continue;
-            if nums[i] > 0:
-                continue
-            if len(nums) == 3 and nums[0] > 0:
-                continue
-            # Apply two sum II here
-            left, right = i+1, len(nums) - 1
-            while left < right  :
-                sum = nums[i] + nums[left] + nums[right]
-                if sum > 0:
-                    right -= 1
-                elif sum < 0:
-                    left += 1
-                else:
-                    # Handle duplicates
-                    res.append([nums[i] , nums[left] , nums[right]])
-                    left += 1
-                    while nums[left] == nums[left-1] and left < right:
-                        left += 1
-            i += 1
-        return res;
-s = Solution()
+        for i in range(len(nums)):
+            two_sum = self.twoSum(nums, i)
+            if two_sum:
+                res.append(two_sum)
+        return res
 
-print(s.threeSum([-3,-3,4,3,2,1]))
+s = Solution()
+# print(s.threeSum([-3,3,4,-3,1,2]))
 print(s.threeSum([-1,0,1,2,-1,-4]))
-print(s.threeSum([0,0,0]))
-print(s.threeSum([0,1,1]))
+# print(s.threeSum([0,1,1]))
+# print(s.threeSum([0,0,0]))
