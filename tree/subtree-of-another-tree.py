@@ -1,0 +1,37 @@
+# https://leetcode.com/problems/subtree-of-another-tree/description/?envType=problem-list-v2&envId=oizxjoit
+
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def isSubtree(self, root: TreeNode, subRoot: TreeNode) -> bool:
+        if not subRoot:
+            return True
+        if not root :
+            return False
+        if self.isSameTree(root, subRoot):
+            return True
+
+        return (self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot))
+
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        if not p and not q:
+            return True
+        if not p or not q or p.val != q.val:
+            return False
+        return(self.isSameTree(p.left, q.left) and
+               self.isSameTree(p.right, q.right))
+
+
+
+
+s = Solution()
+r = TreeNode(3, left=TreeNode(4, left = TreeNode(1), right = TreeNode(2, left = TreeNode(0))), right = TreeNode(5))
+r = TreeNode(3, left=TreeNode(4, left = TreeNode(1), right = TreeNode(2)), right = TreeNode(5))
+sr = TreeNode(4, left=TreeNode(1), right = TreeNode(2))
+
+print( s.isSubtree(r, sr))
